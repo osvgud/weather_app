@@ -1,4 +1,3 @@
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Weather !{% endblock %}
@@ -10,11 +9,15 @@
     {% endif %}
     <br>
     <br>
-    <ul>
-        <li>Šiandien: {{ weatherData.date }}</li>
-        <li>Temperatūra dieną: {{ weatherData.dayTemp }}</li>
-        <li>Temperatūra naktį: {{ weatherData.nightTemp }}</li>
-        <li>Dangus: {{ weatherData.sky }}</li>
-    </ul>
+    {% if error != '' %}
+        <h1>{{ error }}</h1>
+    {% else %}
+        <ul>
+            <li>Šiandien: {{ weatherData.date }}</li>
+            <li>Temperatūra dieną: {{ weatherData.dayTemp }}</li>
+            <li>Temperatūra naktį: {{ weatherData.nightTemp }}</li>
+            <li>Dangus: {{ weatherData.sky }}</li>
+        </ul>
+    {% endif %}
 
 {% endblock %}
