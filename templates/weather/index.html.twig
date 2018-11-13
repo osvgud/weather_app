@@ -9,15 +9,11 @@
     {% endif %}
     <br>
     <br>
-    {% if error != '' %}
-        <h1>{{ error }}</h1>
-    {% else %}
         <ul>
             <li>Šiandien: {{ weatherData.date }}</li>
             <li>Temperatūra dieną: {{ weatherData.dayTemp }}</li>
             <li>Temperatūra naktį: {{ weatherData.nightTemp }}</li>
             <li>Dangus: {{ weatherData.sky }}</li>
         </ul>
-    {% endif %}
 
 {% endblock %}

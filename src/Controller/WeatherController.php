@@ -20,21 +20,26 @@ class WeatherController extends AbstractController
                 $errormsg = $resp;
             }
         }
-        try {
-            $fromGoogle = new WeatherService();
-            $weather = $fromGoogle->getDay(new \DateTime($day));
-        } catch (\Exception $exp) {
-            $weather = new NullWeather();
+        if($errormsg != '')
+        {
+            return $this->render('weather/error.html.twig', [
+                'error' => $errormsg ]);
         }
-
-        return $this->render('weather/index.html.twig', [
-            'error' => $errormsg,
-            'weatherData' => [
-                'date'      => $weather->getDate()->format('Y-m-d'),
-                'dayTemp'   => $weather->getDayTemp(),
-                'nightTemp' => $weather->getNightTemp(),
-                'sky'       => $weather->getSky()
-            ],
-        ]);
+        else {
+            try {
+                $fromGoogle = new WeatherService();
+                $weather = $fromGoogle->getDay(new \DateTime($day));
+            } catch (\Exception $exp) {
+                $weather = new NullWeather();
+            }
+            return $this->render('weather/index.html.twig', [
+                'weatherData' => [
+                    'date' => $weather->getDate()->format('Y-m-d'),
+                    'dayTemp' => $weather->getDayTemp(),
+                    'nightTemp' => $weather->getNightTemp(),
+                    'sky' => $weather->getSky()
+                ],
+            ]);
+        }
     }
 }

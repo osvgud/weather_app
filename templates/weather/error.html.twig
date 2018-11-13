@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Weather !{% endblock %}
+
+{% block body %}
+
+    {% if  app.request.get('day') is not empty %}
+        Parametras {{ app.request.get('day') }}
+    {% endif %}
+<br>
+<br>
+<h1>{{ error }}</h1>
+
+{% endblock %}
